@@ -1,55 +1,71 @@
 <?php
-
-abstract class Car {
-    abstract public function drive();
+interface Animal {
+    public function make_sound(): string;
 }
-class ElectricCar extends Car {
-    public function drive() {
-        echo "Driving an electric car.\n";
+ 
+class Lion implements Animal {
+    public function make_sound(): string {
+        return 'Рычание';
     }
 }
-
-class PetrolCar extends Car {
-    public function drive() {
-        echo "Driving a petrol car.\n";
+ 
+class Monkey implements Animal {
+    public function make_sound(): string {
+        return 'Визг';
     }
 }
-
-class HybridCar extends Car {
-    public function drive() {
-        echo "Driving a hybrid car.\n";
+ 
+class Elephant implements Animal {
+    public function make_sound(): string {
+            return 'Трубление';
+        }
+    }
+ 
+class Raven implements Animal {
+    public function make_sound(): string {
+        return 'Карканье';
     }
 }
-abstract class CarFactory {
-    abstract public function produceCar(): Car;
+ 
+interface AnimalFactory {
+    public function getAnimal(): Animal;
 }
-class ElectricCarFactory extends CarFactory {
-    public function produceCar(): Car {
-        return new ElectricCar();
+ 
+class LionFactory implements AnimalFactory {
+    public function getAnimal(): Animal {
+        return new Lion();
     }
-}
-
-class PetrolCarFactory extends CarFactory {
-    public function produceCar(): Car {
-        return new PetrolCar();
+ 
     }
-}
-
-class HybridCarFactory extends CarFactory {
-    public function produceCar(): Car {
-        return new HybridCar();
+ 
+class MonkeyFactory implements AnimalFactory {
+        public function getAnimal(): Animal {
+            return new Monkey();
+        }
     }
+ 
+    class ElephantFactory implements AnimalFactory {
+        public function getAnimal(): Animal {
+            return new Elephant();
+        }
+    }
+ 
+    class RavenFactory implements AnimalFactory {
+        public function getAnimal(): Animal {
+            return new Raven();
+        }
+    }
+ 
+function interact_with_animal(AnimalFactory $factory) {
+    $animal = $factory->getAnimal();
+    echo 'Звук: ' . $animal->make_sound() . '!' . PHP_EOL;
 }
-if (PHP_SAPI === 'cli') { // Для запуска в консоли
-    $electricFactory = new ElectricCarFactory();
-    $petrolFactory = new PetrolCarFactory();
-    $hybridFactory = new HybridCarFactory();
-
-    $electricCar = $electricFactory->produceCar();
-    $petrolCar = $petrolFactory->produceCar();
-    $hybridCar = $hybridFactory->produceCar();
-
-    $electricCar->drive(); // Output: Driving an electric car.
-    $petrolCar->drive();   // Output: Driving a petrol car.
-    $hybridCar->drive();   // Output: Driving a hybrid car.
-}
+ 
+$lion_factory = new LionFactory();
+$monkey_factory = new MonkeyFactory();
+$elephant_factory = new ElephantFactory();
+$raven_factory = new RavenFactory();
+interact_with_animal($lion_factory);     # Вывод: Звук: Рычание!
+interact_with_animal($monkey_factory);   # Вывод: Звук: Визг!
+interact_with_animal($elephant_factory); # Вывод: Звук: Трубление!
+interact_with_animal($_factory);
