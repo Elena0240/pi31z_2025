@@ -1,6 +1,5 @@
 <?php
  
-// Абстрактный класс Car, представляющий базовую функциональность автомобиля
 abstract class Car {
     protected string $type;
     protected int $enginePower;
@@ -18,11 +17,11 @@ abstract class Car {
         return $this->fuelConsumptionOrBatteryCapacity;
     }
  
-    // Метод для управления автомобилем
+    
     abstract public function drive();
 }
  
-// Электрический автомобиль
+
 class ElectricCar extends Car {
     public function __construct(int $enginePower, float $batteryCapacity) {
         parent::__construct();
@@ -36,7 +35,7 @@ class ElectricCar extends Car {
     }
 }
  
-// Бензиновый автомобиль
+
 class PetrolCar extends Car {
     public function __construct(int $enginePower, float $fuelConsumption) {
         parent::__construct();
@@ -50,7 +49,7 @@ class PetrolCar extends Car {
     }
 }
  
-// Гибридный автомобиль
+
 class HybridCar extends Car {
     public function __construct(int $enginePower, float $fuelConsumption, float $batteryCapacity) {
         parent::__construct();
@@ -65,33 +64,33 @@ class HybridCar extends Car {
     }
 }
  
-// Интерфейс для фабрики автомобилей
+
 interface CarFactory {
     public function produceCar(): Car;
 }
  
-// Фабрика для электрических автомобилей
+
 class ElectricCarFactory implements CarFactory {
     public function produceCar(): Car {
         return new ElectricCar(150, 60); // Электрический автомобиль с мощностью 150 л.с. и батареей 60 кВт·ч
     }
 }
  
-// Фабрика для бензиновых автомобилей
+
 class PetrolCarFactory implements CarFactory {
     public function produceCar(): Car {
         return new PetrolCar(200, 10); // Бензиновый автомобиль с мощностью 200 л.с. и расходом 10 л/100км
     }
 }
  
-// Фабрика для гибридных автомобилей
+
 class HybridCarFactory implements CarFactory {
     public function produceCar(): Car {
         return new HybridCar(180, 8, 30); // Гибридный автомобиль с мощностью 180 л.с., расходом 8 л/100км и батареей 30 кВт·ч
     }
 }
  
-// Пример использования
+
 $electricFactory = new ElectricCarFactory();
 $petrolFactory = new PetrolCarFactory();
 $hybridFactory = new HybridCarFactory();
